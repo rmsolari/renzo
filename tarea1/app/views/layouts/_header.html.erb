@@ -1,0 +1,26 @@
+<div id="app" class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-faded">
+        <a class="navbar-brand" href="#">Tarea 1 - Renzo Solari</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="navbarNavDropdown" class="navbar-collapse collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <%= link_to "|    Página Principal    |    ", root_path %><span class="sr-only">(current)</span>
+                </li>
+
+            </ul>
+            <ul class="navbar-nav">
+              <% if user_signed_in? %>
+                Logged in as <strong><%= current_user.email %></strong>.
+                <%= link_to 'Edit profile  |', edit_user_registration_path, :class => 'navbar-link' %>
+                <%= link_to "|  Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+              <% else %>
+                <%= link_to "Sign up  | ", new_user_registration_path, :class => 'navbar-link'  %>
+                <%= link_to "|  Login", new_user_session_path, :class => 'navbar-link'  %>
+              <% end %>
+            </ul>
+        </div>
+    </nav>
+</div>

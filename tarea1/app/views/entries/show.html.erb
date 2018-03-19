@@ -1,0 +1,50 @@
+<div class="jumbotron text-center">
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Titulo:</strong>
+  <%= @entry.titulo %>
+</p>
+
+<p>
+  <strong>Bajada:</strong>
+  <%= @entry.bajada %>
+</p>
+
+<p>
+  <strong>Cuerpo:</strong>
+  <%= @entry.cuerpo %>
+</p>
+
+<p>
+  <strong>Fecha:</strong>
+  <%= @entry.fecha %>
+</p>
+
+<p>
+  <strong>Link:</strong>
+  <%= link_to @entry.url, "http://#{@entry.url}"%>
+</p>
+
+<% if current_user.try(:email) == 'rmsolari@uc.cl' %>
+<%= link_to 'Editar', edit_entry_path(@entry) %> |
+<%= link_to 'Volver', entries_path %>
+<% else %>
+<%= link_to 'Volver', entries_path %>
+<% end %>
+</div>
+<p>
+  <strong>Comentarios: </strong>
+  <% @entry.comments.each do |comment| %>
+    <p><%= comment.nombre%> : <%= comment.texto %></p>
+  <% end %></p>
+<center>
+  <%= form_for([@entry, @entry.comments.build]) do |f| %>
+  <strong>Agregar un comentario</strong><p></p>
+  <%= f.label :nombre  %>:
+  <%= f.text_field :nombre%><p></p>
+  <%= f.label :comentario  %>:
+  <%= f.text_area :texto %><p></p>
+	<%= f.submit %>
+  <% end %>
+</center>
